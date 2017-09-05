@@ -23,6 +23,8 @@ app.use('/tip_submit',require('./models/tips.js'));
 
 app.use('/htmlques',require('./models/html_ques.js'));
 
+app.use('/cssques',require('./models/css_ques.js'));
+
 app.listen(8000,function(){
 	console.log("server listening at port 8000");
 })
