@@ -16,8 +16,10 @@ app.use(bodyparser.urlencoded({
 }))
 
 app.get('/',function(req,res){
-	res.send("Response ok");
+	res.send("Response oky");
 })
+app.use('/register',require('./models/signup.js'));
+app.use('/code',require('./models/codes.js'))
 
 app.use('/tip_submit',require('./models/tips.js'));
 

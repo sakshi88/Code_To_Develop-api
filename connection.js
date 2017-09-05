@@ -1,5 +1,5 @@
 var sequelize=require('sequelize');
-var seq=new sequelize('code_to_develop','root','sakshi',{
+var seq=new sequelize('codetodevelop','root','mittalsm',{
 	host: 'localhost',
 	dialect: 'mysql',
 	pool:{
