@@ -35,14 +35,30 @@ router.get('/all_users',function(req,res){
 });
 router.post('/usersignup',function(req,res){
 	data_body=req.body;
-	signup.create({
-		email:data_body.email,
-		fullname:data_body.fullname,
-		password:data_body.password,
-		confirm_password:data_body.confirm_password
+	signup.find({
+		where:{
+			email:data_body.email
+		}
 	}).then((response)=>{
-		res.send(response.data);
+		if(response)
+		{
+			res.send("false");
+
+		}
+		else
+		{
+			signup.create({
+				email:data_body.email,
+				fullname:data_body.fullname,
+				password:data_body.password,
+				confirm_password:data_body.confirm_password
+			}).then((response)=>{
+				res.send("true");
+
+			})
+		}
 	})
+	
 })
 router.post('/usersignin',function(req,res){
 	data_body=req.body;
@@ -50,8 +66,8 @@ router.post('/usersignin',function(req,res){
 		where:{
 			email:data_body.email
 		}
-	}).then((signup)=>{
-		if(signup)
+	}).then((response)=>{
+		if(response)
 		{
 			res.send(response.password);
 		}
@@ -59,6 +75,15 @@ router.post('/usersignin',function(req,res){
 		{
 			res.send("");
 		}
+	})
+})
+
+router.post('/findTotaluser',function(req,res){
+	signup.findAll({
+		order:[['id','DESC']],
+		limit:1
+	}).then((response)=>{
+		res.send(response);
 	})
 })
 module.exports=router;

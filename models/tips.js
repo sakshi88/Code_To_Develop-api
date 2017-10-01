@@ -20,7 +20,8 @@ tip_table=connection.seq.define('tip_table',{
 	tip_language: {
 		type: sequelize.STRING,
 		allowNull: false
-	}
+	},
+
 },{
 	freezeTableName: true,
 	timestamps: true,
@@ -67,44 +68,19 @@ router.post('/submit_tip',function(request,response){
 		response.send("table created and mail sent");
 	})
 })
-
-router.post('/getFrontEndTips',function(req,res){
-	databody=req.body;
-
-	tip_table.findAll({
-		where:{
-			tip_language: databody.tip_language
-		}
-	}).then(function(response){
-		console.log(response);
+router.get('/getAllTips',function(req,res){
+	tip_table.findAll().then((response)=>{
 		res.send(response);
 	})
 })
-
-router.post('/getBackEndTips',function(req,res){
+router.post('/deleteOneTip',function(req,res){
 	databody=req.body;
-
-	tip_table.findAll({
+	tip_table.destroy({
 		where:{
-			tip_language: databody.tip_language
+			tip_heading:databody.tip_heading
 		}
-	}).then(function(response){
-		console.log(response);
-		res.send(response);
+	}).then((response)=>{
+		res.send("Deleted on entry");
 	})
 })
-
-router.post('/getJavaTips',function(req,res){
-	databody=req.body;
-
-	tip_table.findAll({
-		where:{
-			tip_language: databody.tip_language
-		}
-	}).then(function(response){
-		console.log(response);
-		res.send(response);
-	})
-})
-
 module.exports=router;

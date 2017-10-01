@@ -13,6 +13,10 @@ codes=connection.seq.define('codes',{
 	codeContent:{
 		type:sequelize.STRING,
 		allowNull:false
+	},
+	desp:{
+		type:sequelize.STRING,
+		allowNull:false
 	}
 },
 {
@@ -26,7 +30,8 @@ router.post('/addCode',function(req,res){
 	codes.create({
 		code_type:data_body.code_type,
 		heading:data_body.heading,
-		codeContent:data_body.codeContent
+		codeContent:data_body.codeContent,
+		desp:data_body.desp,
 	}).then((response)=>{
 		res.send("OKATTTTTT");
 	})
@@ -52,4 +57,25 @@ router.post('/getdesiredCode',function(req,res){
 		res.send(response);
 	})
 })
+
+router.post('/getRecentcodes',function(req,res)
+{
+	databody=req.body;
+	codes.findAll({
+		limit:5,
+		order:[['updatedAt','DESC']]
+	}).then((response)=>{
+		res.send(response);
+	})
+})
+
+router.post('/findTotalcode',function(req,res){
+	codes.findAll({
+		order:[['id','DESC']],
+		limit:1
+	}).then((response)=>{
+		res.send(response);
+	})
+})
 module.exports=router;
+
