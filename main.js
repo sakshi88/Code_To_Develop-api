@@ -18,15 +18,20 @@ app.use(bodyparser.urlencoded({
 app.get('/',function(req,res){
 	res.send("Response oky");
 })
+
 app.use('/register',require('./models/signup.js'));
+
 app.use('/code',require('./models/codes.js'))
 
 app.use('/tip_submit',require('./models/tips.js'));
+
 app.use('/tip',require('./models/approvedTips.js'))
 
 app.use('/htmlques',require('./models/html_ques.js'));
 
 app.use('/cssques',require('./models/css_ques.js'));
+
+app.use('/addtestQues',require('./models/test_Ques.js'));
 
 app.listen(8080,function(){
 	console.log("server listening at port 8000");

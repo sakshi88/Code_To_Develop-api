@@ -86,4 +86,29 @@ router.post('/findTotaluser',function(req,res){
 		res.send(response);
 	})
 })
+
+router.post('/checkAUser',function(req,res){
+	data_body=req.body;
+	signup.find({
+		where:{
+			email: data_body.email
+		}
+	}).then(function(response){
+		console.log(response);
+		res.send(response);
+	})
+})
+
+router.post('/deleteAUser',function(req,res){
+	data_body=req.body;
+	signup.destroy({
+		where: {
+			email: data_body.email
+		}
+	}).then(function(response){
+		console.log("user deleted");
+		res.send("user deleted");
+	})
+})
+
 module.exports=router;

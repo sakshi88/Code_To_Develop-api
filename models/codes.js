@@ -23,6 +23,7 @@ codes=connection.seq.define('codes',{
 	freezeTableName:true,
 	timestamps:true,
 })
+
 codes.sync();
 
 router.post('/addCode',function(req,res){
@@ -47,6 +48,7 @@ router.post('/getjavaHeading',function(req,res){
 		res.send(response);
 	})
 })
+
 router.post('/getdesiredCode',function(req,res){
 	data_body=req.body;
 	codes.find({
